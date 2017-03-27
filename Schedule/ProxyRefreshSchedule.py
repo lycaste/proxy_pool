@@ -30,7 +30,6 @@ __author__ = 'JHao'
 
 
 url = 'http://ditu.amap.com/service/poiInfo?query_type=RQBXY&pagesize=20000&pagenum=&qii=true&cluster_state=5&need_utd=true&utd_sceneid=1000&div=PC1000&addr_poi_merge=true&is_classify=true&zoom=15&longitude=121.319963&latitude=31.194223&range=1000&city=310000&keywords=%E7%BE%8E%E9%A3%9F'
-url1 =  
 class ProxyRefreshSchedule(ProxyManager):
     """
     代理定时刷新
