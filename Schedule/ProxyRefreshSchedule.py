@@ -16,6 +16,7 @@
 import sys
 import time
 import requests
+import json
 from multiprocessing import Process
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -27,6 +28,8 @@ from Util.LogHandler import LogHandler
 
 __author__ = 'JHao'
 
+
+url = 'http://ditu.amap.com/service/poiInfo?query_type=RQBXY&pagesize=20000&pagenum=&qii=true&cluster_state=5&need_utd=true&utd_sceneid=1000&div=PC1000&addr_poi_merge=true&is_classify=true&zoom=15&longitude=121.319963&latitude=31.194223&range=1000&city=310000&keywords=%E7%BE%8E%E9%A3%9F'
 
 class ProxyRefreshSchedule(ProxyManager):
     """
@@ -50,8 +53,9 @@ class ProxyRefreshSchedule(ProxyManager):
                        "https": "https://{proxy}".format(proxy=raw_proxy)}
             try:
                 # 超过30秒的代理就不要了
-                r = requests.get('https://www.baidu.com/', proxies=proxies, timeout=30, verify=False)
-                if r.status_code == 200:
+                r = requests.get(url, proxies=proxies, timeout=10, verify=False)
+                data = json.loads(r)
+                if data.get('status') == '1':
                     self.db.changeTable(self.useful_proxy_queue)
                     self.db.put(raw_proxy)
                     self.log.debug('proxy: %s validation passes' % raw_proxy)
