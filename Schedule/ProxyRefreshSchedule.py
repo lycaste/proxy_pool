@@ -30,7 +30,7 @@ __author__ = 'JHao'
 
 
 url = 'http://ditu.amap.com/service/poiInfo?query_type=RQBXY&pagesize=20000&pagenum=&qii=true&cluster_state=5&need_utd=true&utd_sceneid=1000&div=PC1000&addr_poi_merge=true&is_classify=true&zoom=15&longitude=121.319963&latitude=31.194223&range=1000&city=310000&keywords=%E7%BE%8E%E9%A3%9F'
-
+url1 =  
 class ProxyRefreshSchedule(ProxyManager):
     """
     代理定时刷新
@@ -55,6 +55,7 @@ class ProxyRefreshSchedule(ProxyManager):
                 # 超过30秒的代理就不要了
                 r = requests.get(url, proxies=proxies, timeout=10, verify=False)
                 data = json.loads(r)
+                print data
                 if data.get('status') == '1':
                     self.db.changeTable(self.useful_proxy_queue)
                     self.db.put(raw_proxy)
