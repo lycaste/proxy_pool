@@ -22,7 +22,6 @@ sys.setdefaultencoding('utf-8')
 from Util.utilFunction import robustCrawl, getHtmlTree
 
 # for debug to disable insecureWarning
-requests.packages.urllib3.disable_warnings()
 
 HEADER = {'Connection': 'keep-alive',
           'Cache-Control': 'max-age=0',
