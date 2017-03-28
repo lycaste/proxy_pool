@@ -52,7 +52,7 @@ class ProxyRefreshSchedule(ProxyManager):
                        "https": "https://{proxy}".format(proxy=raw_proxy)}
             try:
                 # 超过30秒的代理就不要了
-                r = requests.get(url, proxies=proxies, timeout=10, verify=False)
+                r = requests.get(url, proxies=proxies, timeout=10, verify=False).content.decode('utf-8')
                 data = json.loads(r)
                 self.log.debug('data: %s ' % data.get('status'))
                 if data.get('status') == '1':
