@@ -54,7 +54,7 @@ class ProxyRefreshSchedule(ProxyManager):
                 # 超过30秒的代理就不要了
                 r = requests.get(url, proxies=proxies, timeout=10, verify=False)
                 data = json.loads(r)
-                print data
+                self.log.debug('data: %s ' % data.get('status'))
                 if data.get('status') == '1':
                     self.db.changeTable(self.useful_proxy_queue)
                     self.db.put(raw_proxy)
