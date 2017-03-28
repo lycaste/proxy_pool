@@ -16,7 +16,7 @@ __author__ = 'JHao'
 import sys
 
 from flask import Flask, jsonify, request
-
+from random import choice
 sys.path.append('../')
 
 from Manager.ProxyManager import ProxyManager
@@ -52,6 +52,11 @@ def refresh():
 def getAll():
     proxys = ProxyManager().getAll()
     return jsonify(list(proxys))
+
+@app.route('/get_one/')
+def getOne():
+    proxys = ProxyManager().getAll()
+    return jsonify(choice(list(proxys)))
 
 
 @app.route('/delete/', methods=['GET'])
